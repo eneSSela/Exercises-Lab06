@@ -130,6 +130,13 @@ public final class UseListsAndMaps {
         /*
          * 8) Compute the population of the world
          */
+        long totPopulation = 0;
+        for(long sum : continents.values()) {
+
+            totPopulation += sum;
+        }
+
+        System.out.println("Total Population : " + totPopulation);
     }
 
 
