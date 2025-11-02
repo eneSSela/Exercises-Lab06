@@ -11,16 +11,93 @@ Prima di eseguire ogni operazione sul worktree o sul repository,
 si verifichi lo stato del repository con `git status`.
 
 1. Si cloni localmente il repository
+
+utente@Computer-Enes MINGW64 ~/OneDrive/Desktop
+$ git clone https://github.com/APICe-at-DISI/OOP-git-merge-conflict-test.git
+Cloning into 'OOP-git-merge-conflict-test'...
+remote: Enumerating objects: 12, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 12 (delta 1), reused 1 (delta 1), pack-reused 8 (from 1)
+Receiving objects: 100% (12/12), done.
+Resolving deltas: 100% (2/2), done.
+
+
+
 2. Ci si assicuri di avere localmente entrambi i branch remoti
+
+utente@Computer-Enes MINGW64 ~/OneDrive/Desktop/OOP-git-merge-conflict-test (master)
+$ git remote -v
+origin  https://github.com/APICe-at-DISI/OOP-git-merge-conflict-test.git (fetch)
+origin  https://github.com/APICe-at-DISI/OOP-git-merge-conflict-test.git (push)
+
+
+
 3. Si faccia il merge di `feature` dentro `master`, ossia: si posizioni la `HEAD` su `master`
-   e da qui si esegua il merge di `feature`
+e da qui si esegua il merge di `feature`
+
+utente@Computer-Enes MINGW64 ~/OneDrive/Desktop/OOP-git-merge-conflict-test (master)
+$ git merge origin/feature
+Auto-merging HelloWorld.java
+CONFLICT (content): Merge conflict in HelloWorld.java
+Automatic merge failed; fix conflicts and then commit the result.
+
+
+
 4. Si noti che viene generato un **merge conflict**!
+
 5. Si risolva il merge conflict come segue:
    - Il programma Java risultante deve stampare sia il numero di processori disponibili
      (funzionalità presente su `master`)
      che il nome dell'autore del file
      (funzionalità presente su `feature`)
+
+public final class HelloWorld {
+
+	private static final String AUTHOR = "Danilo Pianini";
+
+	public static void main(final String[] args) {
+		System.out.println("This program is running in a PC with " + procNumber() + " logic processors!");
+		System.out.println("This program has been realised by " + AUTHOR);
+	}
+
+	public static int procNumber() {
+		return Runtime.getRuntime().availableProcessors();
+	}
+}
+
+
+
 6. Si crei un nuovo repository nel proprio github personale
+
+utente@Computer-Enes MINGW64 ~/OneDrive/Desktop/OOP-git-merge-conflict-test (master)
+$ git remote add origin https://github.com/eneSSela/GitRemote-ResolvedMergeConflict.git
+
+
+
 7. Si aggiunga il nuovo repository creato come **remote** e si elenchino i remote
+
+utente@Computer-Enes MINGW64 ~/OneDrive/Desktop/OOP-git-merge-conflict-test (master)
+$ git remote -v
+origin  https://github.com/eneSSela/GitRemote-ResolvedMergeConflict.git (fetch)
+origin  https://github.com/eneSSela/GitRemote-ResolvedMergeConflict.git (push)
+
+
+
 8. Si faccia push del branch `master` sul proprio repository
+
+utente@Computer-Enes MINGW64 ~/OneDrive/Desktop/OOP-git-merge-conflict-test (master)
+$ git push -u origin master
+Enumerating objects: 15, done.
+Counting objects: 100% (15/15), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (11/11), done.
+Writing objects: 100% (15/15), 1.56 KiB | 1.56 MiB/s, done.
+Total 15 (delta 4), reused 10 (delta 2), pack-reused 0
+remote: Resolving deltas: 100% (4/4), done.
+To https://github.com/eneSSela/GitRemote-ResolvedMergeConflict.git
+ * [new branch]      master -> master
+branch 'master' set up to track 'origin/master'.
+
+
 9. Si setti il branch remoto `master` del nuovo repository come *upstream* per il proprio branch `master` locale
