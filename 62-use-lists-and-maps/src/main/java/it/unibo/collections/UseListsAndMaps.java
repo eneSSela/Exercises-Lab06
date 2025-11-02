@@ -15,6 +15,7 @@ public final class UseListsAndMaps {
     private static final int MIN = 1000;
     private static final int MAX = 2000;
     private static final int WRITE_ELEMENTS = 100_000;
+    private static final int READ_ELEMENTS = 1000;
 
     private UseListsAndMaps() {
     }
@@ -86,6 +87,13 @@ public final class UseListsAndMaps {
          * LinkedList, using the collections of point 5. In order to measure
          * times, use as example TestPerformance.java.
          */
+        long timeReadingArray = measureListOperation(testLinkedList, READ_ELEMENTS, 1);
+        long timeReadingLinked = measureListOperation(testLinkedList, READ_ELEMENTS, 1);
+
+        System.out.println("Read ArrayList : " + TimeUnit.NANOSECONDS.toMillis(timeReadingArray) + " ms");
+        System.out.println("Read LinkedList : " + TimeUnit.NANOSECONDS.toMillis(timeReadingLinked) + " ms");
+
+
         /*
          * 7) Build a new Map that associates to each continent's name its
          * population:
