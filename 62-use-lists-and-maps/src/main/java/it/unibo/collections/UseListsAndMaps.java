@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Example class using {@link List} and {@link Map}.
@@ -13,6 +14,7 @@ public final class UseListsAndMaps {
 
     private static final int MIN = 1000;
     private static final int MAX = 2000;
+    private static final int WRITE_ELEMENTS = 100_000;
 
     private UseListsAndMaps() {
     }
@@ -68,6 +70,16 @@ public final class UseListsAndMaps {
          * using the previous lists. In order to measure times, use as example
          * TestPerformance.java.
          */
+        ArrayList<Integer> testArrayList = new ArrayList<>();
+        LinkedList<Integer> testLinkedList = new LinkedList<>();
+
+        long timeWritingArray = measureListOperation(testArrayList, WRITE_ELEMENTS,0);
+        long timeWritingLinked = measureListOperation(testLinkedList, WRITE_ELEMENTS,0);
+
+        System.out.println("Write ArrayList : " + TimeUnit.NANOSECONDS.toMillis(timeWritingArray) + " ms");
+        System.out.println("Write LinkedList : " + TimeUnit.NANOSECONDS.toMillis(timeWritingLinked) + " ms");
+
+
         /*
          * 6) Measure the performance of reading 1000 times an element whose
          * position is in the middle of the collection for both ArrayList and
@@ -93,5 +105,36 @@ public final class UseListsAndMaps {
         /*
          * 8) Compute the population of the world
          */
+    }
+
+
+    public static long measureListOperation(List<Integer> list, int nElements, int operationType) {
+        
+        /*Scrittura = 0*/
+        if(operationType == 0) {
+
+            long start = System.nanoTime();
+            
+            for (int i = 0; i < nElements; i++) {
+                list.add(0, i);
+            }
+            
+            long end = System.nanoTime();
+            return end - start;
+        }
+        /*Lettura = 1*/
+        else if(operationType == 1) {
+
+            long start = System.nanoTime();
+            int middleIndex = list.size() / 2;
+
+            for (int i = 0; i < nElements; i++) {
+                list.get(middleIndex);
+            }
+            
+            long end = System.nanoTime();
+            return end - start;
+        }
+        return 0;
     }
 }
