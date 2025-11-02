@@ -1,6 +1,7 @@
 package it.unibo.collections;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,12 @@ public final class UseListsAndMaps {
     private static final int MAX = 2000;
     private static final int WRITE_ELEMENTS = 100_000;
     private static final int READ_ELEMENTS = 1000;
+    private static final long AFRICA_POPULATION = 1110635000L;
+    private static final long AMERICAS_POPULATION = 972005000L;
+    private static final long ANTARCTICA_POPULATION = 0L;
+    private static final long ASIA_POPULATION = 4298723000L;
+    private static final long EUROPE_POPULATION = 742452000L;
+    private static final long OCEANIA_POPULATION = 38304000L;
 
     private UseListsAndMaps() {
     }
@@ -110,6 +117,16 @@ public final class UseListsAndMaps {
          *
          * Oceania -> 38,304,000
          */
+        Map<String, Long> continents = new HashMap<>();
+
+        continents.put("Africa", AFRICA_POPULATION);
+        continents.put("Americas", AMERICAS_POPULATION);
+        continents.put("Antartica", ANTARCTICA_POPULATION);
+        continents.put("Asia", ASIA_POPULATION);
+        continents.put("Europe", EUROPE_POPULATION);
+        continents.put("Oceania", OCEANIA_POPULATION);
+
+
         /*
          * 8) Compute the population of the world
          */
