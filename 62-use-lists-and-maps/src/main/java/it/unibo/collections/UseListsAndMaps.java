@@ -48,6 +48,11 @@ public final class UseListsAndMaps {
          * element of the first list. You can not use any "magic number".
          * (Suggestion: use a temporary variable)
          */
+        int dummy = listInt.get(0); 
+        listInt.set(0, listInt.get(listInt.size() - 1)); 
+        listInt.set(listInt.size() - 1, dummy); 
+
+
         /*
          * 4) Using a single for-each, print the contents of the arraylist.
          */
