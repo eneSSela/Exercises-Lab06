@@ -28,7 +28,17 @@ public final class UseGraph {
         /*
          * Test your graph implementation(s) by calling testGraph
          */
-        testGraph(null);
+        Graph<String> graph = new GraphImpl<>();
+
+        /*Test DFS*/
+        graph.setStrategy(new StrategyDFS<>());
+        System.out.println("Test DFS:");
+        testGraph(graph);
+
+        /*Test BFS*/
+        graph.setStrategy(new StrategyBFS<>());
+        System.out.println("Test BFS:");
+        testGraph(graph);
     }
 
     private static void testGraph(final Graph<String> graph) {
