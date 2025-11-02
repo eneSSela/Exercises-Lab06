@@ -52,4 +52,6 @@ public interface Graph<N> {
      */
     List<N> getPath(N source, N target);
 
+    /*Imposta la strategia di esplorazione*/
+    void setStrategy(StrategyExploration<N> strategy);
 }
